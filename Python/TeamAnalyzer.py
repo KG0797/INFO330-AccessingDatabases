@@ -63,3 +63,4 @@ if answer.upper() == "Y" or answer.upper() == "YES":
 else:
     print("Bye for now!")
 
+conn.close()
