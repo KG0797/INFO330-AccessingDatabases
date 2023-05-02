@@ -18,8 +18,6 @@ cursor = conn.cursor()
 for i, arg in enumerate(sys.argv):
     if i == 0:
         continue
-        
-team = team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
 for i in team:
     result = cursor.execute("SELECT name, type1, type2, against_bug, against_dark, against_dragon, against_electric, against_fairy, against_fight, against_fire, against_flying, against_ghost, against_grass, against_ground, against_ice, against_normal, against_poison, against_psychic, against_rock, against_steel, against_water FROM imported_pokemon_data WHERE pokedex_number = {}".format(i))
     pokemon_list = list(cursor.fetchone())
