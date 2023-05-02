@@ -1,7 +1,9 @@
 import sqlite3  # This is the package for all sqlite3 access in Python
 import sys      # This helps with command-line parameters
 
-conn = sqlite3.connect('pokemon.db')
+
+path =r'C:\Users\Katherine Guo\Desktop\info330\INFO330-CreatingRelations2\pokemon.db'
+conn = sqlite3.connect(path)
 cursor = conn.cursor()
 
 # All the "against" column suffixes:
