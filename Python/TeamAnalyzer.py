@@ -1,6 +1,9 @@
 import sqlite3  # This is the package for all sqlite3 access in Python
 import sys      # This helps with command-line parameters
 
+conn = sqlite3.connect('pokemon.db')
+cursor = conn.cursor()
+
 # All the "against" column suffixes:
 types = ["bug","dark","dragon","electric","fairy","fight",
     "fire","flying","ghost","grass","ground","ice","normal",
