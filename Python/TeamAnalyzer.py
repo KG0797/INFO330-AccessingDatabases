@@ -46,5 +46,6 @@ if answer.upper() == "Y" or answer.upper() == "YES":
     print("Saving " + teamName + " ...")
 else:
     print("Bye for now!")
-
+    
+conn.commit()
 conn.close()
