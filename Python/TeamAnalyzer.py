@@ -14,7 +14,8 @@ team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
 
 conn = sqlite3.connect('../pokemon.sqlite')
 cursor = conn.cursor()
-
+print(cursor.execute('select * from pokemon limit ').fetchone())
+print('hello world')
 for i, arg in enumerate(sys.argv):
     if i == 0:
         continue
