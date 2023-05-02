@@ -12,7 +12,7 @@ if len(sys.argv) < 6:
     sys.exit()
 team = sys.argv[1:]
 
-conn = sqlite3.connect('pokemon.db')
+conn = sqlite3.connect('pokemon.sqlite')
 cursor = conn.cursor()
 
 
