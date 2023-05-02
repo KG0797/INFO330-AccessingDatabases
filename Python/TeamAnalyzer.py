@@ -17,6 +17,11 @@ for i, arg in enumerate(sys.argv):
         continue
 
     # Analyze the pokemon whose pokedex_number is in "arg"
+       conn = sqlite3.connect('pokemon.db')
+       cursor = conn.cursor()
+       
+       cursor.execute('SELECT name,type1, type2 FROM pokemon WHERE pokedex_number = ?', (arg,)) 
+       result = cursor.fetchone()
 
     # You will need to write the SQL, extract the results, and compare
     # Remember to look at those "against_NNN" column values; greater than 1
