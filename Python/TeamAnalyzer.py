@@ -1,9 +1,6 @@
 import sqlite3  # This is the package for all sqlite3 access in Python
 import sys      # This helps with command-line parameters
 
-conn = sqlite3.connect('pokemon.db')
-cursor = conn.cursor()
-
 # All the "against" column suffixes:
 types = ["bug","dark","dragon","electric","fairy","fight",
     "fire","flying","ghost","grass","ground","ice","normal",
@@ -13,13 +10,16 @@ types = ["bug","dark","dragon","electric","fairy","fight",
 if len(sys.argv) < 6:
     print("You must give me six Pokemon to analyze!")
     sys.exit()
+team = []
 
+conn = sqlite3.connect('pokemon.sqlite')
+cursor = conn.cursor()
 
 for i, arg in enumerate(sys.argv):
     if i == 0:
         continue
         
-team= sys.argv[0:]
+team = team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
 for i in team:
     result = cursor.execute("SELECT name, type1, type2, against_bug, against_dark, against_dragon, against_electric, against_fairy, against_fight, against_fire, against_flying, against_ghost, against_grass, against_ground, against_ice, against_normal, against_poison, against_psychic, against_rock, against_steel, against_water FROM imported_pokemon_data WHERE pokedex_number = {}".format(i))
     pokemon_list = list(cursor.fetchone())
