@@ -14,30 +14,29 @@ if len(sys.argv) < 6:
     print("You must give me six Pokemon to analyze!")
     sys.exit()
 
-team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
+team=[]
 for i, arg in enumerate(sys.argv):
     if i == 0:
         continue
-<<<<<<< HEAD    
         
-    for i in team:
-        result = cursor.execute("SELECT name, type1, type2, against_bug, against_dark, against_dragon, against_electric, against_fairy, against_fight, against_fire, against_flying, against_ghost, against_grass, against_ground, against_ice, against_normal, against_poison, against_psychic, against_rock, against_steel, against_water FROM imported_pokemon_data WHERE pokedex_number = {}".format(i))
-        pokemon_list = list(cursor.fetchone())
-        strong = []
-        weak = []
-        against_list = pokemon_list[3:]
+team = []    
+for i in team:
+    result = cursor.execute("SELECT name, type1, type2, against_bug, against_dark, against_dragon, against_electric, against_fairy, against_fight, against_fire, against_flying, against_ghost, against_grass, against_ground, against_ice, against_normal, against_poison, against_psychic, against_rock, against_steel, against_water FROM imported_pokemon_data WHERE pokedex_number = {}".format(i))
+    pokemon_list = list(cursor.fetchone())
+    strong = []
+    weak = []
+    against_list = pokemon_list[3:]
+    print("Analyzing", i)
 
-        for a in range(len(against_list)):
-            if float(against_list[a]) > 1:
-                strong.append(types[a])
-            elif float(against_list[a]) < 1:
-                weak.append(types[a])
-            else:
-                continue
-        print("{} ({} {}) is strong against {} but weak against {}".format(pokemon_list[0], pokemon_list[1], pokemon_list[2], strong, weak))  
+    for a in range(len(against_list)):
+        if float(against_list[a]) > 1:
+            strong.append(types[a])
+        elif float(against_list[a]) < 1:
+            weak.append(types[a])
+        else:
+            continue
+    print("{} ({} {}) is strong against {} but weak against {}".format(pokemon_list[0], pokemon_list[1], pokemon_list[2], strong, weak))  
  
->>>>>>> 2375fc41f28b239621ba27253d77697f2854489e
-
 answer = input("Would you like to save this team? (Y)es or (N)o: ")
 if answer.upper() == "Y" or answer.upper() == "YES":
     teamName = input("Enter the team name: ")
@@ -47,5 +46,3 @@ if answer.upper() == "Y" or answer.upper() == "YES":
 else:
     print("Bye for now!")
     
-conn.commit()
-conn.close()
