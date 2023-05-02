@@ -10,7 +10,7 @@ types = ["bug","dark","dragon","electric","fairy","fight",
 if len(sys.argv) < 6:
     print("You must give me six Pokemon to analyze!")
     sys.exit()
-team=[]
+team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
 
 conn = sqlite3.connect('../pokemon.sqlite')
 cursor = conn.cursor()
@@ -18,9 +18,33 @@ cursor = conn.cursor()
 for i, arg in enumerate(sys.argv):
     if i == 0:
         continue
-against_list = []
-for i in against_list:
-    result = cursor.execute("SELECT name, type1, type2, against_bug, against_dark, against_dragon, against_electric, against_fairy, against_fight, against_fire, against_flying, against_ghost, against_grass, against_ground, against_ice, against_normal, against_poison, against_psychic, against_rock, against_steel, against_water FROM imported_pokemon_data WHERE pokedex_number = {}".format(i))
+for i in team:
+    result = cursor.execute("""Select pokedex_number,name,pokemon_type1,pokemon_type2,against_bug,against_dark,against_dragon,against_electric,against_fairy,against_fight,against_fire,against_flying,against_ghost,against_grass,against_ground,against_ice,against_normal,against_poison,against_psychic,against_rock,against_steel,against_water from 
+(
+Select t1.pokemon_id,pokemon_type1,pokemon_type2,type_id1,type_id2 from 
+(
+Select a.pokemon_id,b.name as pokemon_type1,type_id as type_id1 from
+(Select pokemon_id,type_id from pokemon_type
+Where which=1 ) a
+Left join 
+(Select id, name from type) b on a. type_id=b.id) t1 
+Left join 
+(
+Select a.pokemon_id,b.name as pokemon_type2,type_id as type_id2 from
+(Select pokemon_id,type_id from pokemon_type
+Where which=2 ) a
+Left join 
+(Select id, name from type) b on a. type_id=b.id
+) t2 on t1.pokemon_id=t2.pokemon_id
+) tt1
+Left join 
+(
+Select id,pokedex_number,name from pokemon
+) tt2 on tt1.pokemon_id=tt2.id
+Left join 
+(
+Select * from against
+) tt3 on tt1.type_id1=tt3.type_source_id1 and tt1.type_id2=tt3.type_source_id2 WHERE pokedex_number = {}""".format(i))
     pokemon_list = list(cursor.fetchone())
     strong = []
     weak = []
