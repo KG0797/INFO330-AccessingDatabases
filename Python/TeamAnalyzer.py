@@ -12,7 +12,7 @@ if len(sys.argv) < 6:
     sys.exit()
 team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
 
-conn = sqlite3.connect(r'C:\Users\Katherine Guo\Desktop\info330\INFO330-AccessingDatabases\pokemon.sqlite')
+conn = sqlite3.connect("../pokemon.sqlite")
 cursor = conn.cursor()
 
 
