@@ -12,8 +12,10 @@ if len(sys.argv) < 6:
     sys.exit()
 team=[sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
 
-conn = sqlite3.connect('../pokemon.sqlite')
+conn = sqlite3.connect(r'C:\Users\Katherine Guo\Desktop\info330\INFO330-AccessingDatabases\pokemon.sqlite')
 cursor = conn.cursor()
+
+
 
 for i, arg in enumerate(sys.argv):
     if i == 0:
@@ -48,7 +50,7 @@ Select * from against
     pokemon_list = list(cursor.fetchone())
     strong = []
     weak = []
-    against_list = pokemon_list[3:]
+    against_list = pokemon_list[4:]
     print("Analyzing", i)
 
     for a in range(len(against_list)):
@@ -58,7 +60,7 @@ Select * from against
             weak.append(types[a])
         else:
             continue
-    print("{} ({} {}) is strong against {} but weak against {}".format(pokemon_list[0], pokemon_list[1], pokemon_list[2], strong, weak))  
+    print("{} ({} {}) is strong against {} but weak against {}".format(pokemon_list[1], pokemon_list[2], pokemon_list[3], strong, weak))  
  
 answer = input("Would you like to save this team? (Y)es or (N)o: ")
 if answer.upper() == "Y" or answer.upper() == "YES":
@@ -68,4 +70,3 @@ if answer.upper() == "Y" or answer.upper() == "YES":
     print("Saving " + teamName + " ...")
 else:
     print("Bye for now!")
-    
